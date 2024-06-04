@@ -4,7 +4,7 @@ import Pagination from "@/Components/Pagination";
 import { PROJECT_STATUS_TEXT_MAP, PROJECT_STATUS_CLASS_MAP } from "@/constants";
 import TextInput from "@/Components/TextInput";
 import SelectInput from "@/Components/SelectInput";
-import {ChevronUpIcon, ChevronDownIcon} from '@heroicons/react/16/solid';
+import TableHeading from "@/Components/TableHeading";
 
 
 export default function Index({auth, projects, queryParams = null}) {
@@ -62,18 +62,65 @@ export default function Index({auth, projects, queryParams = null}) {
                                 <table className="w-full text-sm  text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
                                         <tr className="text-nowrap">
-                                            <th onClick={e => sortChanged('id')} className="px-3 py-3">
+                                            <TableHeading
+                                            field_name={'id'}
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}>
                                                 ID
-                                                <ChevronUpIcon className="w-4"/>
-                                                <ChevronDownIcon className="w-4"/>
-                                            </th>
-                                            <th className="px-3 py-3">Image</th>
-                                            <th onClick={e => sortChanged('name')} className="px-3 py-3">Name</th>
-                                            <th onClick={e => sortChanged('status')} className="px-3 py-3">Status</th>
-                                            <th onClick={e => sortChanged('created_at')} className="px-3 py-3">Create At</th>
-                                            <th onClick={e => sortChanged('due_date')} className="px-3 py-3">Due Date</th>
-                                            <th className="px-3 py-3">Created By</th>
-                                            <th className="px-3 py-3 text-right">Actions</th>
+                                            </TableHeading>
+                                            <TableHeading
+                                            field_name={'image'}
+                                            isSortable={false}
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}>
+                                                Image
+                                            </TableHeading>
+                                            <TableHeading
+                                            field_name={'name'}
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}>
+                                                Name
+                                            </TableHeading>
+                                            <TableHeading
+                                            field_name={'status'}
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}>
+                                                Status
+                                            </TableHeading>
+                                            <TableHeading
+                                            field_name={'created_at'}
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}>
+                                                Created At
+                                            </TableHeading>
+                                            <TableHeading
+                                            field_name={'due_date'}
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}>
+                                                Due Date
+                                            </TableHeading>
+                                            <TableHeading
+                                            field_name={'created_by'}
+                                            isSortable={false}
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}>
+                                                Created By
+                                            </TableHeading>
+                                            <TableHeading
+                                            field_name={'actions'}
+                                            isSortable={false}
+                                            sort_field={queryParams.sort_field}
+                                            sort_direction={queryParams.sort_direction}
+                                            sortChanged={sortChanged}>
+                                                Actions
+                                            </TableHeading>
                                         </tr>
                                     </thead>
 
