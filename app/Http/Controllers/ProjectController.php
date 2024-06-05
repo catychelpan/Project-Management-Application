@@ -7,7 +7,8 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 class ProjectController extends Controller
 {
     /**
@@ -36,6 +37,7 @@ class ProjectController extends Controller
         return inertia("Project/Index", [
             "projects" => ProjectResource::collection($projects),
             "queryParams" => request()->query() ?: null,
+            'success' => session('success'),
 
         ]);
     }
@@ -45,7 +47,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return inertia("Project/Create");
     }
 
     /**
@@ -53,7 +55,21 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+
+        /** @var $image \Illuminate\Http\UploadedFile */
+        $data = $request->validated();
+        $image = $data['image'] ?? null;
+        $data['created_by'] = Auth::id();
+        $data['updated_by'] = Auth::id();
+
+        //provide: 1)path inside which we want to store an image; 2)disk
+        if ($image) {
+            $data['image_path'] = $image->store('project/' .Str::random(), 'public');
+        }
+
+        Project::create($data);
+
+        return to_route('project.index')->with('success', 'Project was created successfully!');
     }
 
     /**
