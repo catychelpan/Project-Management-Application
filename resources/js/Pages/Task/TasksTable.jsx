@@ -153,7 +153,7 @@ export default function TasksTable({tasks, queryParams = null, hideProjectColumn
                                     <Link href={route("task.show", task.id)}>{task.name}</Link>
                                 </th>
                                 <td className="px-3 py-2">
-                                    <span className={`${TASK_STATUS_CLASS_MAP[task.status]} px-2 py-1 rounded text-white`}>{TASK_STATUS_TEXT_MAP[task.status]}</span>
+                                    <span className={`${TASK_STATUS_CLASS_MAP[task.status]} px-2 py-1 rounded text-white text-nowrap`}>{TASK_STATUS_TEXT_MAP[task.status]}</span>
 
                                 </td>
                                 <td className="px-3 py-2 text-nowrap">{task.created_at}</td>
