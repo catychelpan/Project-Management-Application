@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
@@ -16,7 +17,7 @@ Route::middleware(['auth','verified'])->group(function() {
 
     //any route defined here will only be accessed if user is authenticated and verified
     //user must be authenticated and their email must be verified
-    Route::get('/dashboard', fn() => Inertia::render('Dashboard'))->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     //Resource routes provide a set of default routes for handling typical CRUD operations
     Route::resource('project', ProjectController::class);
